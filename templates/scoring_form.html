@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block content %}
+    <h1>Информация о кредите</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.name.errors }}
+        {{ form.non_field_errors }}
+        {{ form|bootstrap }}
+        <input type="submit" class="save btn btn-default" value="Отправить"/>
+    </form>
+{% endblock %}
