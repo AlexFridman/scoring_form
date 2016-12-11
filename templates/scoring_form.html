@@ -2,10 +2,12 @@
 {% load bootstrap %}
 
 {% block content %}
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.name.errors }}
-        {{ form.non_field_errors }}
-        {{ form|bootstrap }}
-        <button type="submit" class="btn btn-primary">Отправить</button>
-    </form>
+    <div class="col-md-offset-3">
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.name.errors }}
+            {{ form.non_field_errors }}
+            {{ form|bootstrap }}
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+    </div>
 {% endblock %}
