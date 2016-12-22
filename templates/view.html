@@ -44,6 +44,7 @@
                                        value="{{ value }}"/>
                             </div>
                         {% endfor %}
+                        <button class="btn btn-primary" onclick="goBack()">Назад</button>
                     </div>
                 </div>
             </div>
@@ -53,6 +54,10 @@
 
 <script src="http://pb.somee.com/bundles/bootstrap?v=gZ_JrrRcQZO8-Z6rM3X_uNyaPB2KzuX7Wbe6fdEQcvE1"></script>
 <script src="http://pb.somee.com/Scripts/Scripts.js"></script>
-
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 </body>
 </html>
