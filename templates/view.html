@@ -56,7 +56,11 @@
 <script src="http://pb.somee.com/Scripts/Scripts.js"></script>
 <script>
     function goBack() {
-        window.history.back();
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.location.href = "http://pb.somee.com";
+        }
     }
 </script>
 </body>
