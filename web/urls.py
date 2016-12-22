@@ -22,5 +22,6 @@ from scoring import views
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^scoring/', views.ScoringView.as_view(), name='scoring'),
-    url(r'^result/', views.get_scoring_res, name='result')
+    url(r'^result/', views.get_scoring_res, name='result'),
+    url(r'^view/', views.get, name='view')
 ]

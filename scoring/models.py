@@ -217,3 +217,18 @@ class ScoringInfo(models.Model):
         x = self._to_feature_vector()
         self.repayment_prob = self._predict(x)
         super(ScoringInfo, self).save(*args, **kwargs)
+
+    def to_kv(self):
+
+        data = []
+        for field in self._meta.get_fields():
+            name = field.verbose_name
+            if name not in {'application id', 'repayment prob'}:
+                choices_reverse_map = dict(field.choices)
+                value = getattr(self, field.attname)
+                if choices_reverse_map:
+                    value = choices_reverse_map[value]
+
+                data.append((name, unicode(value)))
+
+        return data

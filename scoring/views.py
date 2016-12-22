@@ -1,5 +1,6 @@
 from django.http import HttpResponseBadRequest, HttpResponseNotFound
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.generic.edit import FormView
 
 from scoring.forms import ScoringForm
@@ -37,3 +38,17 @@ def get_scoring_res(request):
         return HttpResponseNotFound()
 
     return JsonResponse({'prob': scoring_info.repayment_prob})
+
+
+def get(request):
+    id_ = request.GET.get('id')
+
+    if id_ is None:
+        return HttpResponseBadRequest('A required argument id is not specified')
+
+    scoring_info = ScoringInfo.objects.filter(application_id=id_).first()
+
+    if scoring_info is None:
+        return HttpResponseNotFound()
+
+    return render(request, 'view.html', context={'data': scoring_info.to_kv()})
