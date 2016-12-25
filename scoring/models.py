@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import os
 import pickle
 
+import numpy as np
 from django.core import validators
 from django.db import models
 
@@ -202,11 +203,11 @@ class ScoringInfo(models.Model):
                 cat_value[value - 1] = 1
                 values.extend(cat_value)
 
-        return values
+        return np.array(values)
 
     @staticmethod
     def _load_model():
-        with open(os.environ['MODEL_PATH']) as f:
+        with open(os.environ['MODEL_PATH'], 'rb') as f:
             return pickle.load(f)
 
     def _predict(self, x):
@@ -229,6 +230,6 @@ class ScoringInfo(models.Model):
                 if choices_reverse_map:
                     value = choices_reverse_map[value]
 
-                data.append((name, unicode(value)))
+                data.append((name, str(value)))
 
         return data
