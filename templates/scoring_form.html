@@ -8,6 +8,16 @@
             {{ form.non_field_errors }}
             {{ form|bootstrap }}
             <button type="submit" class="btn btn-primary">Отправить</button>
+            <button class="btn btn-primary" onclick="goBack()">Назад</button>
         </form>
     </div>
+    <script>
+    function goBack() {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.location.href = "http://pb.somee.com";
+        }
+    }
+</script>
 {% endblock %}
