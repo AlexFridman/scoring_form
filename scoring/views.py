@@ -1,4 +1,4 @@
-from django.http import HttpResponseBadRequest, HttpResponseNotFound
+from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic.edit import FormView
@@ -52,3 +52,16 @@ def get(request):
         return HttpResponseNotFound()
 
     return render(request, 'view.html', context={'data': scoring_info.to_kv()})
+
+
+def copy(request):
+    src, dst = request.GET.get('src_id'), request.GET.get('dst_id')
+
+    scoring_info = ScoringInfo.objects.filter(application_id=src).first()
+
+    if scoring_info is None:
+        return HttpResponseNotFound()
+
+    scoring_info.application_id = dst
+    scoring_info.save()
+    return HttpResponse(status=200)
