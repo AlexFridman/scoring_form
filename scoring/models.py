@@ -1,7 +1,6 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from django.core import validators
 from django.db import models
 
 
@@ -139,7 +138,8 @@ class ScoringInfo(models.Model):
             ('property', 4),
             ('purpose', 11),
             ('status_of_existing_checking_account', 4),
-            ('telephone', 'b')
+            ('telephone', 'b'),
+            ('request_id', None)
         ]
 
         form = {}
