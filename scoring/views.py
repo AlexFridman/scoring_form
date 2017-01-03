@@ -1,14 +1,18 @@
+import logging
+
 import requests
-from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpResponse
+from django.http import HttpResponseBadRequest, HttpResponseNotFound
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic.edit import FormView
 from powerbank_bot.config import BotApi
+from powerbank_bot.helpers.api_wrapper import ApiWrapper
 from powerbank_bot.helpers.storage import Storage
 
 from scoring.forms import ScoringForm
 from scoring.models import ScoringInfo
-from powerbank_bot.helpers.api_wrapper import ApiWrapper
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def decode_id(id):
@@ -51,12 +55,15 @@ class ScoringView(FormView):
             # TODO: assume bot api is running on the same machine
             form['result'] = requests.post('http://localhost:{port}/predict_proba'.format(port=BotApi.port),
                                            json=form).json()['prob']
+            logging.debug(form)
         except Exception as e:
+            logging.exception('Failed to get prediction')
             return render(self.request, 'error.html', {'message': 'Произошла ошибка. Попробуйте позже'})
         else:
             try:
                 Storage().update_scoring_form(form)
             except:
+                logging.exception('Failed to save form')
                 return render(self.request, 'error.html', {'message': 'Произошла ошибка. Попробуйте позже'})
 
 
