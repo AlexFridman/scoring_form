@@ -23,6 +23,5 @@ urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^scoring/', views.ScoringView.as_view(), name='scoring'),
     url(r'^result/', views.get_scoring_res, name='result'),
-    url(r'^view/', views.get, name='view'),
-    url(r'^copy/', views.copy, name='copy')
+    url(r'^view/', views.get, name='view')
 ]

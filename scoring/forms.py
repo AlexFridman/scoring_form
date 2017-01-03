@@ -7,7 +7,9 @@ class ScoringForm(forms.ModelForm):
     class Meta:
         model = ScoringInfo
         widgets = {
-            'application_id': forms.HiddenInput(),
-            'repayment_prob': forms.HiddenInput()
+            'credit_amount': forms.HiddenInput(),
+            'duration_in_month': forms.HiddenInput(),
+            'age': forms.HiddenInput(),
+            'request_id': forms.HiddenInput()
         }
         fields = '__all__'
