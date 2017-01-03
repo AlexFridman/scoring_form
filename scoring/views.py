@@ -86,4 +86,4 @@ def get(request):
     if not form:
         return render(request, 'error.html', {'message': 'Не удалось открыть форму'})
 
-    return render(request, 'view.html', context={'data': ScoringInfo.from_dict(form).to_kv(plus_1=True)})
+    return render(request, 'view.html', context={'data': ScoringInfo.from_dict(form).to_kv()})
