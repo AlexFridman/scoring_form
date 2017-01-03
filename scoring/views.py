@@ -53,8 +53,9 @@ class ScoringView(FormView):
         try:
             form = ScoringInfo.from_dict(form.data).to_dict()
             # TODO: assume bot api is running on the same machine
-            form['result'] = requests.post('http://localhost:{port}/predict_proba'.format(port=BotApi.port),
-                                           json=form).json()['prob']
+            response = requests.post('http://localhost:{port}/predict_proba'.format(port=BotApi.port),
+                                           json=form).json()
+            form['result'], form['result'] = response['prob'], response['dummy_prob']
             logging.debug(form)
         except Exception as e:
             logging.exception('Failed to get prediction')
