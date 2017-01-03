@@ -3,7 +3,7 @@ import logging
 import requests
 from django.http import HttpResponseBadRequest, HttpResponseNotFound
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
 from powerbank_bot.config import BotApi
 from powerbank_bot.helpers.api_wrapper import ApiWrapper
@@ -65,6 +65,7 @@ class ScoringView(FormView):
             except:
                 logging.exception('Failed to save form')
                 return render(self.request, 'error.html', {'message': 'Произошла ошибка. Попробуйте позже'})
+        return redirect(self.success_url)
 
 
 def get_scoring_res(request):
