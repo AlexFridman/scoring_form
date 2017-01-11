@@ -56,16 +56,6 @@ class ScoringInfo(models.Model):
         verbose_name='Размер кредита (руб.)',
         validators=[validators.MinValueValidator(100), validators.MaxValueValidator(10 ** 7)]
     )
-    savings_account = models.IntegerField(
-        verbose_name='Текущий счет',
-        choices=[
-            (0, '... < 100 руб.'),
-            (1, '100 <= ... < 500 руб.'),
-            (2, '500 <= ... < 1000 руб.'),
-            (3, '... > 1000 руб.'),
-            (4, 'нет данных / нет аккаунта'),
-        ]
-    )
     present_employment_since = models.IntegerField(
         verbose_name='Время на текущем месте работы',
         choices=[
@@ -75,10 +65,6 @@ class ScoringInfo(models.Model):
             (3, '4 <= ... < 7 лет'),
             (4, '... >= 7 лет'),
         ]
-    )
-    installment_rate = models.IntegerField(
-        verbose_name='Процент выплат от дохода',
-        validators=[validators.MinValueValidator(1), validators.MaxValueValidator(100)]
     )
     personal_status = models.IntegerField(
         verbose_name='Семейное положение и пол',
@@ -97,10 +83,6 @@ class ScoringInfo(models.Model):
             (1, 'созаявитель'),
             (2, 'гарант'),
         ]
-    )
-    present_residence_since = models.IntegerField(
-        verbose_name='Время проживания на текущем месте жительства (лет)',
-        validators=[validators.MinValueValidator(0), validators.MaxValueValidator(100)]
     )
     property = models.IntegerField(
         verbose_name='Имущество',
@@ -131,10 +113,6 @@ class ScoringInfo(models.Model):
             (2, 'бесплатное')
         ]
     )
-    number_of_existing_credits = models.IntegerField(
-        verbose_name='Количество текущих кредитов в нашем банке',
-        validators=[validators.MinValueValidator(0), validators.MaxValueValidator(10)]
-    )
     job = models.IntegerField(
         verbose_name='Тип занятости',
         choices=[
@@ -143,10 +121,6 @@ class ScoringInfo(models.Model):
             (2, 'квалифицированный'),
             (3, 'менеджмент / высококвалифицированный')
         ]
-    )
-    number_of_liable_people = models.IntegerField(
-        verbose_name='Количество поручителей',
-        validators=[validators.MinValueValidator(0), validators.MaxValueValidator(10)]
     )
     telephone = models.IntegerField(
         verbose_name='Телефон',
@@ -174,19 +148,14 @@ class ScoringInfo(models.Model):
             ('foreign_worker', 'b'),
             ('housing', 3),
             ('installment_plans', 3),
-            ('installment_rate', None),
             ('job', 4),
-            ('number_of_existing_credits', None),
-            ('number_of_liable_people', None),
             ('other_debtors', 3),
             ('personal_status', 5),
             ('present_employment_since', 5),
-            ('present_residence_since', None),
             ('property', 4),
             ('purpose', 11),
-            ('savings_account', 5),
             ('status_of_existing_checking_account', 4),
-            ('telephone', 'b'),
+            ('telephone', 'b')
         ]
 
         values = []
