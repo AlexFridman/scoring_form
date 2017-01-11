@@ -10,7 +10,7 @@ from scoring.models import ScoringInfo
 class ScoringView(FormView):
     template_name = 'scoring_form.html'
     form_class = ScoringForm
-    success_url = 'http://pb.somee.com/Request/ClientViewRequests'
+    success_url = 'http://pb1.somee.com/Request/ClientViewRequests'
 
     def get(self, request, *args, **kwargs):
         if 'id' not in request.GET:
