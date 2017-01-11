@@ -37,7 +37,7 @@ def get_scoring_res(request):
     if scoring_info is None:
         return HttpResponseNotFound()
 
-    return JsonResponse({'prob': scoring_info.repayment_prob})
+    return JsonResponse({'prob': scoring_info.repayment_prob, 'prob_dummy': scoring_info.repayment_dummy_prob})
 
 
 def get(request):
