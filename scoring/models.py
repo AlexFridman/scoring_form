@@ -196,8 +196,7 @@ class ScoringInfo(models.Model):
             ('property', 4),
             ('purpose', 11),
             ('status_of_existing_checking_account', 4),
-            ('telephone', 'b'),
-            ('request_id', None)
+            ('telephone', 'b')
         ]
 
         form = {}
