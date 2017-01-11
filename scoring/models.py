@@ -180,6 +180,33 @@ class ScoringInfo(models.Model):
         self.repayment_prob, self.repayment_dummy_prob = response['prob'], response['dummy_prob']
         super(ScoringInfo, self).save(*args, **kwargs)
 
+    def to_dict(self):
+        schema = [
+            ('age', None),
+            ('credit_amount', None),
+            ('credit_history', 5),
+            ('duration_in_month', None),
+            ('foreign_worker', 'b'),
+            ('housing', 3),
+            ('installment_plans', 3),
+            ('job', 4),
+            ('other_debtors', 3),
+            ('personal_status', 5),
+            ('present_employment_since', 5),
+            ('property', 4),
+            ('purpose', 11),
+            ('status_of_existing_checking_account', 4),
+            ('telephone', 'b'),
+            ('request_id', None)
+        ]
+
+        form = {}
+
+        for field_name, conf in schema:
+            form[field_name] = getattr(self, field_name)
+
+        return form
+
     def to_kv(self):
 
         data = []
